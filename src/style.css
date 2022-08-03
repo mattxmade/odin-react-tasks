@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+main {
+  width: 100%;
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+}
+
+p,
+li {
+  font-family: "Maven Pro", sans-serif;
+}
+
+button {
+  font-weight: bold;
+}
+
+ul {
+  width: 75vw;
+  display: grid;
+  padding-top: 2rem;
+  place-items: center;
+  border-top: 0.1rem solid lightgrey;
+}
+
+main {
+  gap: 2rem;
+  display: grid;
+  align-items: center;
+  place-items: center;
+  justify-content: center;
+}
+
+form {
+  width: 75vw;
+  max-width: 60rem;
+  gap: 2rem;
+  display: flex;
+}
+
+input {
+  width: 100%;
+  justify-self: flex-start;
+}
+
+/*===========
+  Overview
+============*/
+.tasks {
+  display: grid;
+  align-items: center;
+}
+
+li {
+  margin: 1rem 0;
+  height: 6rem;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 140, 255, 0.1);
+}
+
+.task {
+  font-weight: bold;
+}
+
+.icons {
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  gap: 2rem;
+}
+
+hr {
+  width: 75vw;
+  outline: 0.1rem solid lightgrey;
+  border: none;
+}/*# sourceMappingURL=style.css.map */
