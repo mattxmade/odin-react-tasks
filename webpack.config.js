@@ -13,6 +13,7 @@ module.exports = {
       inject: true,
       minify: false,
       title: "Tasks",
+      favicon: "./src/tasks_48x48.ico",
       template: "./src/index.html",
     }),
     new CopyPlugin({
