@@ -24,8 +24,10 @@ h1 {
   font-family: "Pacifico", cursive;
 }
 
+i,
 p,
-li {
+li,
+span {
   font-family: "Maven Pro", sans-serif;
 }
 
@@ -80,11 +82,41 @@ li {
   background-color: rgba(0, 140, 255, 0.1);
 }
 
+.task-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.task-container > p {
+  margin-right: 1rem;
+}
+
+.task-info {
+  width: 100%;
+  position: relative;
+}
+
 .task {
   font-weight: bold;
 }
 
-.icons {
+.task-input {
+  width: inherit;
+  position: absolute;
+  padding: 0.5rem;
+  top: -0.5rem;
+  left: -0.5rem;
+  font-size: 1.6rem;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.task-icons {
+  font-size: 1.8rem;
   cursor: pointer;
   margin-left: auto;
   display: flex;
