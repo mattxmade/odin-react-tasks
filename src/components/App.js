@@ -23,31 +23,58 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      task: { value: "", id: uniqid(), remove: this.removeTask },
+      task: {
+        value: "",
+        id: uniqid(),
+        action: {
+          remove: this.removeTask,
+          update: this.updateTask,
+        },
+      },
       tasks: [],
     };
   }
 
   handleInput = (e) => {
-    const { value, id, remove } = this.state.task;
+    const { value, id, action } = this.state.task;
 
     this.setState({
-      task: { value: e.target.value, id: id, remove: remove },
+      task: { value: e.target.value, id, action },
     });
   };
 
   submitTask = (e) => {
     e.preventDefault();
 
+    if (this.state.task.value === "") return;
+
     this.setState({
       tasks: this.state.tasks.concat(this.state.task),
-      task: { value: "", id: uniqid(), remove: this.removeTask },
+      task: {
+        value: "",
+        id: uniqid(),
+        action: this.state.task.action,
+      },
     });
   };
 
-  removeTask = (e, id) => {
+  removeTask = (e, taskID) => {
     e.preventDefault();
-    this.setState({ tasks: this.state.tasks.filter((task) => task.id !== id) });
+
+    this.setState({
+      tasks: this.state.tasks.filter((task) => task.id !== taskID),
+    });
+  };
+
+  updateTask = (taskID, newValue) => {
+    if (this.state.task.value === newValue || newValue === "") return;
+
+    this.setState({
+      tasks: this.state.tasks.filter((task) => {
+        if (task.id === taskID) task.value = newValue;
+        return task;
+      }),
+    });
   };
 
   render() {
