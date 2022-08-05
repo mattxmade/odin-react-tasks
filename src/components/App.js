@@ -3,8 +3,6 @@ import React, { useState, Component } from "react";
 import Overview from "./Overview";
 import uniqid from "uniqid";
 
-const Main = styled.main``;
-
 const Input = styled.input`
   padding: 0.5rem;
 `;
@@ -22,6 +20,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    const sessionStorage = localStorage.getItem("tasks");
+
     this.state = {
       task: {
         value: "",
@@ -31,8 +31,21 @@ class App extends React.Component {
           update: this.updateTask,
         },
       },
-      tasks: [],
+      tasks:
+        sessionStorage && sessionStorage.length
+          ? JSON.parse(sessionStorage).map((task) => {
+              task.action = {
+                remove: this.removeTask,
+                update: this.updateTask,
+              };
+              return task;
+            })
+          : [],
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.tasks !== this.state.tasks) this.updateLocalStorage();
   }
 
   handleInput = (e) => {
@@ -77,9 +90,12 @@ class App extends React.Component {
     });
   };
 
+  updateLocalStorage = () =>
+    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+
   render() {
     return (
-      <Main>
+      <main>
         <h1>My Tasks</h1>
 
         <form>
@@ -95,10 +111,22 @@ class App extends React.Component {
           </Submit>
         </form>
 
-        <Overview tasks={this.state.tasks} />
-      </Main>
+        <ul>
+          {this.state.tasks.map((task, index) => (
+            <Overview
+              key={index}
+              task={task}
+              index={index}
+              length={this.state.tasks.length}
+            />
+          ))}
+        </ul>
+      </main>
     );
   }
 }
 
 export default App;
+
+// .bind(this) is not needed as functions are ES6 | context is built-in
+// cannot stringify functions | re-add methods to task when parsing
