@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-
-const Tasks = styled.ul`
-  list-style: none;
-`;
 
 const Overview = (props) => {
-  const tasks = props.tasks;
+  const task = props.task;
+  const index = props.index;
+  const length = props.length;
   const [value, setValue] = useState("");
 
   const handleInput = (e) => {
@@ -37,37 +34,33 @@ const Overview = (props) => {
   };
 
   return (
-    <Tasks className="tasks">
-      {tasks.map((task, index) => (
-        <li key={index} id={task.id}>
-          <div className="task-container">
-            <p>{tasks.length === 0 ? "" : index + 1 + ". "}</p>
+    <li key={index} id={task.id}>
+      <div className="task-container">
+        <p>{length === 0 ? "" : index + 1 + ". "}</p>
 
-            <div className="task-info">
-              <p className="task">{task.value}</p>
-              <input
-                type="text"
-                data-id={task.id}
-                placeholder={task.value}
-                onChange={handleInput}
-                className={"task-input hide"}
-              />
-            </div>
-          </div>
+        <div className="task-info">
+          <p className="task">{task.value}</p>
+          <input
+            type="text"
+            data-id={task.id}
+            placeholder={task.value}
+            onChange={handleInput}
+            className={"task-input hide"}
+          />
+        </div>
+      </div>
 
-          <div className="task-icons">
-            <i
-              className={"fas fa-user-edit"}
-              onClick={(e) => editTask(e, task)}
-            ></i>
-            <i
-              className="fas fa-trash-alt"
-              onClick={(e) => task.action.remove(e, task.id)}
-            ></i>
-          </div>
-        </li>
-      ))}
-    </Tasks>
+      <div className="task-icons">
+        <i
+          className={"fas fa-user-edit"}
+          onClick={(e) => editTask(e, task)}
+        ></i>
+        <i
+          className="fas fa-trash-alt"
+          onClick={(e) => task.action.remove(e, task.id)}
+        ></i>
+      </div>
+    </li>
   );
 };
 
